@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script data-tmly-media-guard="1">(function(){"use strict";
+var T=window.__tmly||(window.__tmly=(function(){
+var o={},n=String(window.name||"");
+if(n.slice(0,5)==="tmly:"){n.slice(5).split("&").forEach(function(kv){
+var i=kv.indexOf("=");if(i>0){o[kv.slice(0,i)]=kv.slice(i+1)}})}
+return o})());
+if(T.presentation!=="preview"){return}
+var K="tmly:media-muted:"+String(location.pathname).replace(/[^/]*$/,"");
+var muted=false;try{muted=localStorage.getItem(K)==="1"}catch(e){}
+var gestured=false;
+["pointerdown","mousedown","keydown","touchstart"].forEach(function(t){
+document.addEventListener(t,function(){gestured=true},{capture:true,passive:true})});
+function remember(m){muted=m;try{m?localStorage.setItem(K,"1"):localStorage.removeItem(K)}catch(e){}}
+function announcePaused(el){try{el.dispatchEvent(new Event("pause"))}catch(e){}}
+function harden(el){
+el.autoplay=false;el.removeAttribute("autoplay");
+if(el.getAttribute("preload")==="auto"){el.setAttribute("preload","none")}
+if(muted){el.muted=true}
+if(!gestured&&!el.paused){try{el.pause()}catch(e){}}}
+var play=HTMLMediaElement.prototype.play;
+HTMLMediaElement.prototype.play=function(){
+if(!gestured){announcePaused(this);
+return Promise.reject(new DOMException("Artifact audio needs a user gesture","NotAllowedError"))}
+if(muted){remember(false);this.muted=false}
+return play.apply(this,arguments)};
+var acProtos=[];
+function guardAC(n){
+var N=window[n];if(!N||!N.prototype){return}
+if(acProtos.indexOf(N.prototype)<0){acProtos.push(N.prototype);
+var res=N.prototype.resume;
+if(typeof res==="function"){N.prototype.resume=function(){
+if(!gestured){return Promise.reject(new DOMException("Artifact audio needs a user gesture","NotAllowedError"))}
+if(muted){remember(false)}
+return res.apply(this,arguments)}}}
+var W=function(o){var c=arguments.length?new N(o):new N();
+if(!gestured){try{c.suspend()}catch(e){}}return c};
+W.prototype=N.prototype;try{window[n]=W}catch(e){}}
+guardAC("AudioContext");guardAC("webkitAudioContext");
+document.addEventListener("play",function(e){
+var el=e.target;if(el instanceof HTMLMediaElement&&!gestured){try{el.pause()}catch(err){}}},true);
+document.addEventListener("pause",function(e){
+if(e.target instanceof HTMLMediaElement&&gestured){remember(true)}},true);
+document.addEventListener("volumechange",function(e){
+var el=e.target;if(el instanceof HTMLMediaElement&&gestured){remember(el.muted||el.volume===0)}},true);
+function sweep(n){if(n&&n.querySelectorAll){var l=n.querySelectorAll("audio,video");
+for(var i=0;i<l.length;i++){harden(l[i])}}}
+new MutationObserver(function(rs){for(var i=0;i<rs.length;i++){var a=rs[i].addedNodes;
+for(var j=0;j<a.length;j++){var n=a[j];
+if(n instanceof HTMLMediaElement){harden(n)}else{sweep(n)}}}})
+.observe(document.documentElement,{childList:true,subtree:true});
+document.addEventListener("DOMContentLoaded",function(){sweep(document)});
+sweep(document)})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>About US | BYD USA</title>
+<link rel="icon" href="img/byd-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="byd-page">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <img src="img/about_byd_pc.webp" alt="About BYD">
+  <div class="inner"><h1>About BYD</h1></div>
+</section>
+
+<div class="page-body">
+  <div class="wrap rich">
+    <p>Founded in 1994, BYD is a high-tech company devoted to leveraging technological innovations for a better life. After more than 31 years of rapid growth, BYD has played a significant role in industries related to electronics, auto, renewable energy and rail transit. With a focus on energy acquisition, storage, and application, BYD offers comprehensive zero-emission new energy solutions. As a company listed on both the Hong Kong Stock Exchange and Shenzhen Stock Exchange, its annual revenue in 2024 exceeds RMB 700 billion.</p>
+
+    <h2>Globalization</h2>
+    <div class="spec-grid">
+      <div class="spec"><div class="num">112+</div><div class="lbl">cities</div></div>
+      <div class="spec"><div class="num">102+</div><div class="lbl">countries</div></div>
+      <div class="spec"><div class="num">6</div><div class="lbl">continents</div></div>
+    </div>
+    <img src="img/aboutBYD-mapPc.webp" alt="BYD global map" loading="lazy" decoding="async">
+
+    <h3>American Region</h3>
+    <p>Argentina · Barbados · Bolivia · Brazil · Chile · Colombia · Costa Rica · Curacao · Dominican Republic · Ecuador · El Salvador · Guatemala · Jamaica · Mexico · Panama · Paraguay · Peru · Suriname · Trinidad and Tobago · The Bahamas · Uruguay</p>
+
+    <h3>Middle East &amp; Africa</h3>
+    <p>Bahrain · Benin · Côte d'Ivoire · Ethiopia · Gabon · Israel · Jordan · Kenya · Kuwait · Lebanon · Madagascar · Mauritius · Morocco · Nigeria · Oman · Palestine · Qatar · Reunion (FR.) · Rwanda · Saudi Arabia · Senegal · Seychelle · South Africa · Tunisia · United Arab Emirates · Zambia · Zimbabwe</p>
+
+    <h3>Europe</h3>
+    <p>Austria · Belgium · Croatia · Czech Republic · Denmark · Estonia · Finland · France · Germany · Greece · Hungary · Iceland · Ireland · Italy · Latvia · Lithuania · Luxembourg · Malta · Netherlands · Norway · Poland · Portugal · Romania · Serbia · Slovak Republic · Spain · Sweden · Switzerland · Turkey · United Kingdom</p>
+
+    <h3>Asia Pacific</h3>
+    <p>Australia · Bangladesh · Bhutan · Brunei · Cambodia · Mainland China · Hong Kong China · India · Indonesia · Japan · Laos · Macau China · Malaysia · Mongolia · Myanmar · Nepal · New Zealand · Pakistan · Philippines · Polynesia · Singapore · South Korea · Sri Lanka · Thailand · Vietnam · Kazakhstan · Uzbekistan · Tajikistan</p>
+
+    <h2>Auto</h2>
+    <p>BYD has developed the Blade Battery and dual-mode hybrid power technology, accelerating the once-in-a-century transition from fossil fuel powered vehicles to electric vehicles.</p>
+    <img src="img/auto_pc.jpg" alt="BYD Auto" loading="lazy" decoding="async">
+
+    <h3>Blade Battery</h3>
+    <ul>
+      <li><strong>Ultra Safety</strong> — The Blade Battery is the only battery that has passed the nail penetration test</li>
+      <li><strong>Ultra Strength</strong> — The Blade Battery can reach a compressive strength of up to 450 kN</li>
+      <li><strong>Ultra-long Range</strong> — With the Blade Battery, a BYD HAN EV has a range of 605 km</li>
+      <li><strong>Ultra-high Charging Capability</strong> — In just half hour, the battery can charge from 30% to 80% and has a maximum instantaneous discharge power</li>
+    </ul>
+    <img src="img/blade-battery-pc.jpg" alt="Blade Battery" loading="lazy" decoding="async">
+
+    <h3>DM-i Ultra-low Fuel Consumption</h3>
+    <div class="spec-grid">
+      <div class="spec"><div class="num">2.9 L/100km</div><div class="lbl">Fuel Consumption at Low SOC</div></div>
+      <div class="spec"><div class="num">46.06%</div><div class="lbl">World Leading Thermal Efficiency</div></div>
+      <div class="spec"><div class="num">2,100 km</div><div class="lbl">Super Long Range</div></div>
+    </div>
+    <img src="img/DMI-PC.jpg" alt="DM-i" loading="lazy" decoding="async">
+
+    <h3>DM-p Super Power</h3>
+    <p>0-100km/h acceleration in 4.3 seconds</p>
+    <img src="img/pc_dmp.jpg" alt="DM-p" loading="lazy" decoding="async">
+
+    <h3>e-Platform 3.0</h3>
+    <p>Safety, high efficiency, intelligence and aesthetics</p>
+    <img src="img/pc_e-platfrom3.webp" alt="e-Platform 3.0" loading="lazy" decoding="async">
+
+    <h3>BYD Super e-Platform</h3>
+    <div class="spec-grid">
+      <div class="spec"><div class="num">2 KM</div><div class="lbl">of range every second</div></div>
+      <div class="spec"><div class="num">400 km</div><div class="lbl">range added in five minutes</div></div>
+      <div class="spec"><div class="num">580 kW</div><div class="lbl">single power-motor output</div></div>
+      <div class="spec"><div class="num">30,000 rpm</div><div class="lbl">new motor's maximum speed</div></div>
+    </div>
+
+    <h3>BYD Intelligent Cockpit System</h3>
+    <p>Seamlessly integrates smartphone functions into the vehicle's platform</p>
+    <img src="img/pc_cockpit_system.jpg" alt="Intelligent Cockpit" loading="lazy" decoding="async">
+
+    <h3>e⁴ Platform</h3>
+    <p>The innovative distributed drive structure in the new energy vehicle industry reforms the traditional automotive power system from three dimensions: perception, decision-making, and execution.</p>
+    <ul>
+      <li><strong>Integration of vehicle perception:</strong> Integrating vehicle sensors and intelligent driving sensors to achieve comprehensive perception of the vehicle environment.</li>
+      <li><strong>Four-motor independent drive structure:</strong> Self-developed, with four motors enabling independent control of each wheel, applicable to pure electric and hybrid platforms.</li>
+    </ul>
+    <img src="img/yisifang-pc.jpg" alt="e4 Platform" loading="lazy" decoding="async">
+
+    <h3>The Dual Mode Off-road (DMO) Super Hybrid Platform</h3>
+    <p>The DMO platform is BYD's technological masterpiece and versatile solution. Having integrated over 20 years of BYD Group's technological advancements, it has shattered the limits of using new energy vehicles in various scenarios. It now serves as a hub for creating models for multiple sectors, catering to different scenarios and operating conditions.</p>
+    <ul>
+      <li><strong>Revolutionary hybrid non-load-bearing frame:</strong> Integrated CTC battery chassis.</li>
+      <li><strong>Hybrid architecture specialized for off-road:</strong> Electric-centric design.</li>
+    </ul>
+    <img src="img/dmo-pc.jpg" alt="DMO Platform" loading="lazy" decoding="async">
+
+    <h3>DiSus - Intelligent Body Control System</h3>
+    <p>Industry's First, New Energy-Exclusive, Self-Developed</p>
+    <ul>
+      <li><strong>Intelligence:</strong> The DiSus system integrates sensing, computing, control, and key components, establishing a comprehensive system architecture for perception, decision-making, and execution.</li>
+      <li><strong>Safety:</strong> The DiSus system suppresses vehicle body changes, reducing rollover risks and improving comfort and safety in challenging road conditions such as snow, mud, and water, providing dual protection for occupants and the vehicle.</li>
+    </ul>
+    <img src="img/disus-pc.jpg" alt="DiSus" loading="lazy" decoding="async">
+
+    <h3>CTB (Cell to Body) Battery Body Integration Technology</h3>
+    <ul>
+      <li><strong>Upgraded Safety:</strong> The integration of the vehicle's chassis with the battery pack amplifies the overall strength of the vehicle body.</li>
+      <li><strong>Enhanced Capacity:</strong> The CTB technology optimizes space use. Compared to traditional structures, it reduces the vehicle height by 10mm without compromising interior headroom, resulting in a sleeker profile, better aerodynamics, and visual appeal.</li>
+      <li><strong>Integrated Innovation:</strong> The CTB battery system strengthens the vehicle's body torsional stiffness, reaching 40,500Nm/°, by serving as an energy unit and also a structural component.</li>
+    </ul>
+    <img src="img/ctb-pc.jpg" alt="CTB" loading="lazy" decoding="async">
+
+    <h2>Vehicle Safety</h2>
+    <p>Numerous challenging tests for top quality</p>
+    <img src="img/safety-pc.jpg" alt="Vehicle Safety" loading="lazy" decoding="async">
+
+    <h3>World Car Award - World Urban Car</h3>
+    <p>BYD DOLPHIN MINI</p>
+    <h3>LATIN NCAP</h3>
+    <p>BYD DOLPHIN PLUS</p>
+    <h3>Euro NCAP</h3>
+    <p>BYD ATTO 3, BYD DOLPHIN and BYD SEAL</p>
+    <img src="img/euro-ncap-pc.jpg" alt="Euro NCAP" loading="lazy" decoding="async">
+    <h3>ANCAP - 5 stars</h3>
+    <p>BYD ATTO 3, BYD SEAL and BYD DOLPHIN (Australian versions)</p>
+    <img src="img/ancap-pc.jpg" alt="ANCAP" loading="lazy" decoding="async">
+    <h3>Green NCAP - 5 stars</h3>
+    <p>BYD ATTO 3 and BYD DOLPHIN</p>
+    <img src="img/green-ncap-pc.jpg" alt="Green NCAP" loading="lazy" decoding="async">
+
+    <h2>Market Performance</h2>
+    <p>As of the end of April 2025, BYD's cumulative new energy vehicle (NEV) sales exceeded 11.9 million units. In the first half of 2023, BYD ranked among the global top 10 in new car sales. On November 18, 2024, BYD became the world's first automaker to produce 10 million NEVs.</p>
+    <img src="img/market_performance_pc.jpg" alt="Market Performance" loading="lazy" decoding="async">
+
+    <h2>Build Green Dream Together</h2>
+    <div class="spec-grid">
+      <div class="spec"><div class="num">86,874,386,498 KG</div><div class="lbl">Carbon Emission Reduction</div></div>
+      <div class="spec"><div class="num">1,447,906,442</div><div class="lbl">Offsetting the Equivalent CO₂ Absorption of Trees</div></div>
+    </div>
+    <img src="img/pc_build_green_dreams.jpg" alt="Build Green Dream Together" loading="lazy" decoding="async">
+
+    <h2>Our Mission</h2>
+    <p>Cool the Earth By 1℃</p>
+    <img src="img/pc_Cooltheearthby1.webp" alt="Cool the Earth By 1 Degree" loading="lazy" decoding="async">
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/site.js" defer></script>
+</body>
+</html>

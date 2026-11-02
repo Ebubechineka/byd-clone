@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script data-tmly-media-guard="1">(function(){"use strict";
+var T=window.__tmly||(window.__tmly=(function(){
+var o={},n=String(window.name||"");
+if(n.slice(0,5)==="tmly:"){n.slice(5).split("&").forEach(function(kv){
+var i=kv.indexOf("=");if(i>0){o[kv.slice(0,i)]=kv.slice(i+1)}})}
+return o})());
+if(T.presentation!=="preview"){return}
+var K="tmly:media-muted:"+String(location.pathname).replace(/[^/]*$/,"");
+var muted=false;try{muted=localStorage.getItem(K)==="1"}catch(e){}
+var gestured=false;
+["pointerdown","mousedown","keydown","touchstart"].forEach(function(t){
+document.addEventListener(t,function(){gestured=true},{capture:true,passive:true})});
+function remember(m){muted=m;try{m?localStorage.setItem(K,"1"):localStorage.removeItem(K)}catch(e){}}
+function announcePaused(el){try{el.dispatchEvent(new Event("pause"))}catch(e){}}
+function harden(el){
+el.autoplay=false;el.removeAttribute("autoplay");
+if(el.getAttribute("preload")==="auto"){el.setAttribute("preload","none")}
+if(muted){el.muted=true}
+if(!gestured&&!el.paused){try{el.pause()}catch(e){}}}
+var play=HTMLMediaElement.prototype.play;
+HTMLMediaElement.prototype.play=function(){
+if(!gestured){announcePaused(this);
+return Promise.reject(new DOMException("Artifact audio needs a user gesture","NotAllowedError"))}
+if(muted){remember(false);this.muted=false}
+return play.apply(this,arguments)};
+var acProtos=[];
+function guardAC(n){
+var N=window[n];if(!N||!N.prototype){return}
+if(acProtos.indexOf(N.prototype)<0){acProtos.push(N.prototype);
+var res=N.prototype.resume;
+if(typeof res==="function"){N.prototype.resume=function(){
+if(!gestured){return Promise.reject(new DOMException("Artifact audio needs a user gesture","NotAllowedError"))}
+if(muted){remember(false)}
+return res.apply(this,arguments)}}}
+var W=function(o){var c=arguments.length?new N(o):new N();
+if(!gestured){try{c.suspend()}catch(e){}}return c};
+W.prototype=N.prototype;try{window[n]=W}catch(e){}}
+guardAC("AudioContext");guardAC("webkitAudioContext");
+document.addEventListener("play",function(e){
+var el=e.target;if(el instanceof HTMLMediaElement&&!gestured){try{el.pause()}catch(err){}}},true);
+document.addEventListener("pause",function(e){
+if(e.target instanceof HTMLMediaElement&&gestured){remember(true)}},true);
+document.addEventListener("volumechange",function(e){
+var el=e.target;if(el instanceof HTMLMediaElement&&gestured){remember(el.muted||el.volume===0)}},true);
+function sweep(n){if(n&&n.querySelectorAll){var l=n.querySelectorAll("audio,video");
+for(var i=0;i<l.length;i++){harden(l[i])}}}
+new MutationObserver(function(rs){for(var i=0;i<rs.length;i++){var a=rs[i].addedNodes;
+for(var j=0;j<a.length;j++){var n=a[j];
+if(n instanceof HTMLMediaElement){harden(n)}else{sweep(n)}}}})
+.observe(document.documentElement,{childList:true,subtree:true});
+document.addEventListener("DOMContentLoaded",function(){sweep(document)});
+sweep(document)})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>News list | BYD USA</title>
+<link rel="icon" href="img/byd-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="byd-page">
+<div id="site-header"></div>
+
+<section class="page-hero" style="height:320px">
+  <img src="img/news.jpg" alt="Newsroom">
+  <div class="inner"><h1>Newsroom</h1></div>
+</section>
+
+<div class="page-body">
+  <div class="wrap">
+    <div class="news-filters">
+      <span class="active">All</span>
+      <span>2022</span>
+      <span>BYD TANG</span>
+      <span>BYD HAN</span>
+    </div>
+
+    <div class="news-grid">
+      <article class="news-card">
+        <div class="thumb"><img src="img/news.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="date">July 16, 2026</div>
+        <h3>Driving excellence together: BYD Group becomes Official Automotive Partner of Paris Saint-Germain</h3>
+        <p>BYD, the world's leading manufacturer of new-energy vehicles, and Paris Saint-Germain, one of the world's most iconic and influential football clubs, are proud to announce a new global partnership through June 2029. Under the three-year agreement, BYD becomes the Official Automotive Partner of Paris Saint-Germain.</p>
+      </article>
+
+      <article class="news-card">
+        <div class="thumb"><img src="img/news.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="date">July 16, 2026</div>
+        <h3>100,000 Vehicles, 5,500 Dreams in the Making: BYD Celebrates Historic Milestones in Camaçari</h3>
+        <p>In just nine months, BYD's largest industrial complex outside Asia reaches 100,000 locally produced electrified vehicles and 5,500 direct Brazilian employees.</p>
+      </article>
+
+      <article class="news-card">
+        <div class="thumb"><img src="img/news.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="date">June 30, 2026</div>
+        <h3>BYD becomes Official Automotive Partner of Khaleeji 27 football tournament</h3>
+        <p>BYD, the world's leading manufacturer of New Energy Vehicles, has reached a new agreement to be the Official Automotive Partner of the Arab Gulf Cup Football Federation (AGCFF) and the Khaleeji 27 tournament.</p>
+      </article>
+
+      <article class="news-card">
+        <div class="thumb"><img src="img/news.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="date">May 28, 2026</div>
+        <h3>BYD Becomes World's First Automaker to Pledge Full Damage Coverage for Both Intelligent Parking and Urban NOA</h3>
+        <p>BYD today pledged Full Damage Coverage for the Urban Navigate on Autopilot (NOA) function of its God's Eye - BYD Intelligent Driving System in China. The company made the landmark announcement at its Intelligence Strategy Launch Event, where it also unveiled China's first 4nm automotive Driving SoC, the XUANJI A3.</p>
+      </article>
+
+      <article class="news-card">
+        <div class="thumb"><img src="img/news.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="date">May 15, 2026</div>
+        <h3>Honeymoon wins first edition of 'Build Your Dream Award' organised by BYD and Mediawan</h3>
+        <p>BYD, the world's leading manufacturer of new energy vehicles and sustainable mobility solutions, and Mediawan, the leading independent and multi-award-winning European studio, are proud to announce that the film Honeymoon, directed by Ukrainian filmmaker Zhanna Ozirna, has won the first edition of the Build Your Dream Award. The prize was awarded on Thursday 14 May, during a ceremony held at the Terrasse by Albane in Cannes.</p>
+      </article>
+
+      <article class="news-card">
+        <div class="thumb"><img src="img/news.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="date">March 13, 2026</div>
+        <h3>DENZA Z9GT to start Europe's FLASH Charging revolution in April: Ready in 5, Full in 9, Cold Add 3</h3>
+        <p>DENZA, the premium technology-oriented automotive brand of the BYD Group, is proud to confirm that its stunning Z9GT flagship will introduce game-changing FLASH Charging and the unique principle of 'Ready in 5, Full in 9, Cold Add 3' to European customers when it is officially launched at an event at Paris's Palais Garnier opera house on 8 April.</p>
+      </article>
+
+      <article class="news-card">
+        <div class="thumb"><img src="img/news.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="date">February 18, 2026</div>
+        <h3>BYD ATTO 2 DM-i Arrives in Argentina to Redefine the SUV Segment</h3>
+        <p>After being recognized as the top brand in sales of pure electric and plug-in hybrid vehicles in Argentina during 2025, BYD continues to consolidate its leadership and commitment to sustainable mobility by expanding its local lineup with the official launch of the BYD ATTO 2 DM-i. More than 130 guests, including almost 100 journalists and influencers onsite to witness the unforgettable moment.</p>
+      </article>
+    </div>
+
+    <div style="text-align:center;margin-top:50px">
+      <a class="btn dark" href="news-list.html">Show More</a>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/site.js" defer></script>
+</body>
+</html>

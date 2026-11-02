@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script data-tmly-media-guard="1">(function(){"use strict";
+var T=window.__tmly||(window.__tmly=(function(){
+var o={},n=String(window.name||"");
+if(n.slice(0,5)==="tmly:"){n.slice(5).split("&").forEach(function(kv){
+var i=kv.indexOf("=");if(i>0){o[kv.slice(0,i)]=kv.slice(i+1)}})}
+return o})());
+if(T.presentation!=="preview"){return}
+var K="tmly:media-muted:"+String(location.pathname).replace(/[^/]*$/,"");
+var muted=false;try{muted=localStorage.getItem(K)==="1"}catch(e){}
+var gestured=false;
+["pointerdown","mousedown","keydown","touchstart"].forEach(function(t){
+document.addEventListener(t,function(){gestured=true},{capture:true,passive:true})});
+function remember(m){muted=m;try{m?localStorage.setItem(K,"1"):localStorage.removeItem(K)}catch(e){}}
+function announcePaused(el){try{el.dispatchEvent(new Event("pause"))}catch(e){}}
+function harden(el){
+el.autoplay=false;el.removeAttribute("autoplay");
+if(el.getAttribute("preload")==="auto"){el.setAttribute("preload","none")}
+if(muted){el.muted=true}
+if(!gestured&&!el.paused){try{el.pause()}catch(e){}}}
+var play=HTMLMediaElement.prototype.play;
+HTMLMediaElement.prototype.play=function(){
+if(!gestured){announcePaused(this);
+return Promise.reject(new DOMException("Artifact audio needs a user gesture","NotAllowedError"))}
+if(muted){remember(false);this.muted=false}
+return play.apply(this,arguments)};
+var acProtos=[];
+function guardAC(n){
+var N=window[n];if(!N||!N.prototype){return}
+if(acProtos.indexOf(N.prototype)<0){acProtos.push(N.prototype);
+var res=N.prototype.resume;
+if(typeof res==="function"){N.prototype.resume=function(){
+if(!gestured){return Promise.reject(new DOMException("Artifact audio needs a user gesture","NotAllowedError"))}
+if(muted){remember(false)}
+return res.apply(this,arguments)}}}
+var W=function(o){var c=arguments.length?new N(o):new N();
+if(!gestured){try{c.suspend()}catch(e){}}return c};
+W.prototype=N.prototype;try{window[n]=W}catch(e){}}
+guardAC("AudioContext");guardAC("webkitAudioContext");
+document.addEventListener("play",function(e){
+var el=e.target;if(el instanceof HTMLMediaElement&&!gestured){try{el.pause()}catch(err){}}},true);
+document.addEventListener("pause",function(e){
+if(e.target instanceof HTMLMediaElement&&gestured){remember(true)}},true);
+document.addEventListener("volumechange",function(e){
+var el=e.target;if(el instanceof HTMLMediaElement&&gestured){remember(el.muted||el.volume===0)}},true);
+function sweep(n){if(n&&n.querySelectorAll){var l=n.querySelectorAll("audio,video");
+for(var i=0;i<l.length;i++){harden(l[i])}}}
+new MutationObserver(function(rs){for(var i=0;i<rs.length;i++){var a=rs[i].addedNodes;
+for(var j=0;j<a.length;j++){var n=a[j];
+if(n instanceof HTMLMediaElement){harden(n)}else{sweep(n)}}}})
+.observe(document.documentElement,{childList:true,subtree:true});
+document.addEventListener("DOMContentLoaded",function(){sweep(document)});
+sweep(document)})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="description" content="The YANGWANG U9 Xtreme — the world's fastest production car. 496.22 km/h, over 3000PS, the world's first series-produced 1200V ultra-high-voltage platform and DiSus-X intelligent body control.">
+<title>YANGWANG U9 Xtreme | BYD USA</title>
+<link rel="icon" href="img/byd-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="byd-page">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <picture>
+    <source media="(max-width: 767px)" srcset="img/U9-Homepage-banner-mob.jpg">
+    <img src="img/u9-homepage-banner-pc.jpg" alt="YANGWANG U9 Xtreme">
+  </picture>
+  <div class="inner">
+    <h1>YANGWANG U9 Xtreme</h1>
+    <p>Fastest Electric Vehicle on Earth. The Pursuit Beyond.</p>
+  </div>
+</section>
+
+<nav class="product-nav">
+  <ul>
+    <li><a href="#exterior" class="active">EXTERIOR</a></li>
+    <li><a href="#design">DESIGN</a></li>
+    <li><a href="#technology">TECHNOLOGY</a></li>
+    <li><a href="#performance">PERFORMANCE</a></li>
+    <li><a href="#specifications">SPECIFICATIONS</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HIGHLIGHTS ============ -->
+<section class="product-section" id="exterior">
+  <div class="wrap">
+    <h2>The Pursuit Beyond</h2>
+    <p class="lead">Conventional mindsets can never create supercars that push the limits. Cars that redefine eras are born from a resolute spirit. The YANGWANG U9 Xtreme, rooted in BYD's 30 years of pioneering electrification expertise, integrates engineers' ultimate visions for new-energy vehicle performance. It shatters the 'impossible barriers', aiming to set benchmarks for top speed and Nurburgring hypercar lap times.</p>
+
+    <div class="spec-grid">
+      <div class="spec"><div class="num">496.22</div><div class="lbl">km/h — The Fastest Car on the Planet</div></div>
+      <div class="spec"><div class="num">6:59.157</div><div class="lbl">Nürburgring Nordschleife Lap Time</div></div>
+      <div class="spec"><div class="num">3000+</div><div class="lbl">PS — Global Horsepower Record</div></div>
+    </div>
+
+    <img src="img/u9x-1.jpg" alt="YANGWANG U9 Xtreme" loading="lazy" style="margin-top:50px">
+
+    <div class="two-col" style="margin-top:50px">
+      <div class="card">
+        <h3>World's Fastest EV</h3>
+        <p>The YANGWANG U9 Xtreme achieved a verified top speed of 496.22 km/h at the ATP Automotive Testing Papenburg test track in Germany.</p>
+      </div>
+      <div class="card">
+        <h3>First Record Attempt on The Nürburgring</h3>
+        <p>On Germany's iconic Nürburgring Nordschleife, the YANGWANG U9 Xtreme delivered a lap time of 6:59.157.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESIGN ============ -->
+<section class="product-section dark" id="design">
+  <div class="wrap">
+    <h2>Design That Captivates</h2>
+    <p class="lead">Every curve and every angle of the YANGWANG U9 Xtreme exudes an innate presence. The iconic design radiates the aura of formidability, captivating and inspiring at first glance.</p>
+    <img src="img/u9x-3.jpg" alt="YANGWANG U9 Xtreme design" loading="lazy">
+
+    <div class="two-col" style="margin-top:50px">
+      <div class="card">
+        <h3>Xtreme</h3>
+        <p>Derived from the English word "Extreme", it proclaims the core product value of the YANGWANG U9 Xtreme: The Pursuit Beyond, Born to Explore the Boundaries of Absolute Speed.</p>
+      </div>
+      <div class="card">
+        <h3>The Unknown "X"</h3>
+        <p>The 'X' stands for the challenges of limits and boundaries. It serves as our guide when exploring uncharted territories and forging ahead alone, driven by uncompromising dreams and aspirations.</p>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:40px">
+      <div class="card"><img src="img/u9x-7.jpg" alt="YANGWANG U9 Xtreme" loading="lazy"></div>
+      <div class="card"><img src="img/u9x-8.jpg" alt="YANGWANG U9 Xtreme" loading="lazy"></div>
+    </div>
+
+    <div class="card" style="margin-top:40px">
+      <h3>Redefine the Limits of Supercars</h3>
+      <p>We define the pinnacle of new energy innovation technology with unrivaled performance. YANGWANG U9 Xtreme turns the unknown "X" into a real-life "Dream Car". It transforms that seemingly whimsical dream into an epoch-making legend in reality, driven by ultimate technology and unwavering dedication.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECHNOLOGY ============ -->
+<section class="product-section" id="technology">
+  <div class="wrap">
+    <h2>Unbounded Exploration of Technology Imagination</h2>
+    <p class="lead">The e⁴ and DiSus-X are the master key, unlocking a new era of automotive excellence for the best engineers today. For over 130 years, the art of racecraft has evolved around conventional pillars—tires, horsepower, lightweight design. In the era of new energy, YANGWANG introduces a revolutionary force: full active vehicle body control.</p>
+
+    <div class="two-col" style="margin-top:40px">
+      <div class="card">
+        <h3>e⁴ Platform</h3>
+        <p>The e⁴ Platform is a powertrain system centered on quad-motor independent drive. It features four breakthrough high-RPM motors, each delivering a peak power of 555kW, together generating over 3000PS of astonishing power. Its distributed four-wheel drive can actively create the yaw torque required for steering through the vectored distribution of torque at the wheels alone.</p>
+      </div>
+      <div class="card">
+        <h3>DiSus-X Intelligent Body Control</h3>
+        <p>DiSus-X is fully compatible with the vehicle's 1200V ultra-high-voltage platform, establishing it as the world's first ultra-high voltage and fully active body control system. Under track conditions, DiSus-X effectively suppresses front-to-rear pitching and lateral roll during acceleration and cornering through rapid independent adjustment of all four suspension arms.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:40px">
+      <h3>1200V Ultra-High-Voltage Platform</h3>
+      <p>The world's first series-produced 1200V ultra-high voltage platform, purpose-built for the YANGWANG U9 Xtreme's track performance. The e⁴ Platform and DiSus-X Intelligent Body Control System, built on this 1200V ultra-high voltage platform, elevate track capability. Combined with an optimized thermal management system, they enable sustained and confident delivery of extreme performance.</p>
+    </div>
+
+    <div class="card" style="margin-top:40px">
+      <h3>Re-Engineered Thermal Management</h3>
+      <p>To meet the demands of track-intensive conditions, the YANGWANG U9 Xtreme features an entirely re-engineered cooling system to support the 133% increased total power output. With a high-flow oil pump and an all-new three-dimensional motor cooling solution, the thermal-exchange efficiency of the electric drive system rises by 40%. This ensures consistent peak performance even during sustained maximum power output and energy-recovery conditions, suppressing thermal fade and delivering maximum power throughout.</p>
+    </div>
+
+    <div class="spec-grid">
+      <div class="spec"><div class="num">1200V</div><div class="lbl">World's first series-production ultra-high-voltage platform</div></div>
+      <div class="spec"><div class="num">30,000rpm</div><div class="lbl">Global fastest motor rpm — 4 motors</div></div>
+      <div class="spec"><div class="num">30C</div><div class="lbl">Blade Battery discharge rate</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERFORMANCE ============ -->
+<section class="product-section dark" id="performance">
+  <div class="wrap">
+    <h2>Extreme Performance</h2>
+    <p class="lead">X FOR BREAKING BOUNDARIES. The YANGWANG U9 Xtreme aims beyond records, with the goal of conquering the more complex challenge of top speed versus lap time — the contrast of corners and the straights between them.</p>
+
+    <div class="spec-grid">
+      <div class="spec"><div class="num">496.22</div><div class="lbl">km/h top speed</div></div>
+      <div class="spec"><div class="num">6:59.157</div><div class="lbl">Nürburgring lap</div></div>
+      <div class="spec"><div class="num">3000+</div><div class="lbl">PS total output</div></div>
+    </div>
+
+    <img src="img/u9x-2.jpg" alt="YANGWANG U9 Xtreme performance" loading="lazy" style="margin-top:50px">
+
+    <div class="two-col" style="margin-top:50px">
+      <div class="card">
+        <h3>Track-level Braking System</h3>
+        <p>Titanium Calipers: High rigidity ensures precise transmission of braking force, providing drivers with more refined braking feedback; low thermal conductivity avoids the risk of brake failure due to high temperatures, fully unleashing the powerful braking performance of carbon-ceramic brake discs.</p>
+      </div>
+      <div class="card">
+        <h3>Carbon-Ceramic Brake Discs</h3>
+        <p>The newly added slotted and drilled design on the disc surface enhances the friction coefficient and cooling efficiency. The increased size of the front discs further strengthens the braking force on the front axle, while the peak operating temperature is reduced by 48°C.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:40px">
+      <h3>Mechanical Braking Integrated with Regenerative Recovery</h3>
+      <p>A sophisticated energy recovery algorithm specifically developed for the Nürburgring Nordschleife, effectively reducing the load on mechanical brakes, thereby enhancing the overall stability and durability of the braking system.</p>
+    </div>
+
+    <div class="card" style="margin-top:40px">
+      <h3>Ultra-lightweight</h3>
+      <p>The world's largest carbon-fibre monocoque: Utilizing aerospace-grade T700/12K high-performance carbon fibre and featuring over 110kg of carbon-fibre, with a density just a fifth of steel's but five to six times the strength.</p>
+    </div>
+
+    <div class="card" style="margin-top:40px">
+      <h3>Tires Engineered for Speeds Exceeding 500 km/h</h3>
+      <p>A high-performance tire engineered for speeds exceeding 500 km/h. Utilizing ultra-high-strength aramid fibre to tightly constrain centrifugal expansion, combined with high-speed standing wave suppression technology, this breakthrough surpasses the 500 km/h speed barrier, delivering exceptional straight-line stability for ultra-high-speed driving. Structural reinforcement in the critical transition zone from bead to sidewall achieves high lateral stiffness, enabling ultra-high G-force cornering stability. The outer tread features oversized continuous blocks that significantly enhance cornering grip, while the inner tread incorporates an efficient vortex drainage-channel system to ensure rapid water evacuation. RaceGrip Pro Semi-Slick Compound Technology delivers over 38% higher friction coefficients, boosting instant grip and handling performance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECIFICATIONS ============ -->
+<section class="product-section" id="specifications">
+  <div class="wrap">
+    <h2>Specifications</h2>
+    <p class="lead">YANGWANG U9 Xtreme — full technical data.</p>
+
+    <table class="spec-table">
+      <thead><tr><th></th><th>YANGWANG U9 Xtreme</th></tr></thead>
+      <tbody>
+        <tr><th colspan="2">PERFORMANCE</th></tr>
+        <tr><td>Top speed</td><td>496.22 km/h (308.33 mph) — verified at ATP Papenburg</td></tr>
+        <tr><td>Nürburgring Nordschleife lap time</td><td>6:59.157</td></tr>
+        <tr><td>0–100 km/h</td><td>2.36 s</td></tr>
+        <tr><td>System output</td><td>Over 3000 PS (2,220 kW)</td></tr>
+        <tr><td>System torque</td><td>1,680 N·m</td></tr>
+        <tr><td>Drive layout</td><td>Quad-motor independent drive, all-wheel drive (e⁴ Platform)</td></tr>
+        <tr><td>Motor peak power</td><td>555 kW per motor × 4</td></tr>
+        <tr><td>Max motor speed</td><td>30,000 rpm</td></tr>
+        <tr><td>Transmission</td><td>Direct drive</td></tr>
+
+        <tr><th colspan="2">BATTERY AND CHARGING</th></tr>
+        <tr><td>Battery type</td><td>BYD Blade lithium iron phosphate (LFP)</td></tr>
+        <tr><td>Battery capacity</td><td>80 kWh</td></tr>
+        <tr><td>Discharge rate</td><td>30C</td></tr>
+        <tr><td>Platform voltage</td><td>1200V ultra-high-voltage (world's first series production)</td></tr>
+        <tr><td>DC fast charging</td><td>Up to 500 kW, dual-plug charging supported</td></tr>
+        <tr><td>AC charging</td><td>7 kW</td></tr>
+        <tr><td>CLTC range</td><td>450 km (280 mi)</td></tr>
+
+        <tr><th colspan="2">DIMENSIONS</th></tr>
+        <tr><td>Length</td><td>4,966 mm</td></tr>
+        <tr><td>Width</td><td>2,029 mm</td></tr>
+        <tr><td>Height</td><td>1,295 mm</td></tr>
+        <tr><td>Wheelbase</td><td>2,900 mm</td></tr>
+        <tr><td>Kerb weight</td><td>2,475–2,480 kg</td></tr>
+        <tr><td>Seating</td><td>2</td></tr>
+        <tr><td>Body style</td><td>Two-door electric super-coupe</td></tr>
+
+        <tr><th colspan="2">CHASSIS AND BODY CONTROL</th></tr>
+        <tr><td>Suspension</td><td>DiSus-X Intelligent Body Control System — fully active, 1200V compatible</td></tr>
+        <tr><td>Body structure</td><td>Carbon-fibre monocoque, aerospace-grade T700/12K, over 110 kg of carbon fibre</td></tr>
+        <tr><td>Brakes</td><td>Carbon-ceramic discs with titanium calipers; integrated regenerative recovery</td></tr>
+        <tr><td>Tyres</td><td>Track-level semi-slick, rated above 500 km/h</td></tr>
+        <tr><td>Thermal management</td><td>Re-engineered cooling, high-flow oil pump, 3D motor cooling, +40% thermal-exchange efficiency</td></tr>
+
+        <tr><th colspan="2">INTERIOR AND TECHNOLOGY</th></tr>
+        <tr><td>Driver display</td><td>Digital instrument cluster</td></tr>
+        <tr><td>Infotainment</td><td>Central touchscreen with YANGWANG connected services</td></tr>
+        <tr><td>Drive modes</td><td>Track and road programmes with DiSus-X body control tuning</td></tr>
+        <tr><td>Production run</td><td>Limited series, no more than 30 units</td></tr>
+      </tbody>
+    </table>
+
+    <p class="lead" style="margin-top:30px;font-size:13px">Figures are manufacturer-published values. Range is measured on the CLTC cycle and will vary with driving style, load, temperature and terrain.</p>
+
+    <div style="margin-top:40px">
+      <a class="btn dark" href="contact-us.html">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIFEDREAMING ============ -->
+<section class="product-section dark">
+  <div class="wrap">
+    <h2>Build your dream with us.</h2>
+    <h3 style="margin-top:30px">The Power</h3>
+    <p class="lead">Launched in November 2022, YANGWANG stands as BYD's flagship premium new-energy vehicle (NEV) brand. It represents BYD's pioneering spirit of exploration, ground-breaking automotive technology, and cutting-edge design, crafting premium NEVs that transcend what customers once deemed achievable. The U9 Xtreme is now being made available to customers, with a limited series production run of no more than 30 units.</p>
+    <img src="img/u9x-6.jpg" alt="Build your dream with us" loading="lazy">
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="js/site.js" defer></script>
+<script>
+document.querySelectorAll('.product-nav a').forEach(function (a) {
+  a.addEventListener('click', function () {
+    document.querySelectorAll('.product-nav a').forEach(function (x) { x.classList.remove('active'); });
+    a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

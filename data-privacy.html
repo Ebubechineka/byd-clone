@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script data-tmly-media-guard="1">(function(){"use strict";
+var T=window.__tmly||(window.__tmly=(function(){
+var o={},n=String(window.name||"");
+if(n.slice(0,5)==="tmly:"){n.slice(5).split("&").forEach(function(kv){
+var i=kv.indexOf("=");if(i>0){o[kv.slice(0,i)]=kv.slice(i+1)}})}
+return o})());
+if(T.presentation!=="preview"){return}
+var K="tmly:media-muted:"+String(location.pathname).replace(/[^/]*$/,"");
+var muted=false;try{muted=localStorage.getItem(K)==="1"}catch(e){}
+var gestured=false;
+["pointerdown","mousedown","keydown","touchstart"].forEach(function(t){
+document.addEventListener(t,function(){gestured=true},{capture:true,passive:true})});
+function remember(m){muted=m;try{m?localStorage.setItem(K,"1"):localStorage.removeItem(K)}catch(e){}}
+function announcePaused(el){try{el.dispatchEvent(new Event("pause"))}catch(e){}}
+function harden(el){
+el.autoplay=false;el.removeAttribute("autoplay");
+if(el.getAttribute("preload")==="auto"){el.setAttribute("preload","none")}
+if(muted){el.muted=true}
+if(!gestured&&!el.paused){try{el.pause()}catch(e){}}}
+var play=HTMLMediaElement.prototype.play;
+HTMLMediaElement.prototype.play=function(){
+if(!gestured){announcePaused(this);
+return Promise.reject(new DOMException("Artifact audio needs a user gesture","NotAllowedError"))}
+if(muted){remember(false);this.muted=false}
+return play.apply(this,arguments)};
+var acProtos=[];
+function guardAC(n){
+var N=window[n];if(!N||!N.prototype){return}
+if(acProtos.indexOf(N.prototype)<0){acProtos.push(N.prototype);
+var res=N.prototype.resume;
+if(typeof res==="function"){N.prototype.resume=function(){
+if(!gestured){return Promise.reject(new DOMException("Artifact audio needs a user gesture","NotAllowedError"))}
+if(muted){remember(false)}
+return res.apply(this,arguments)}}}
+var W=function(o){var c=arguments.length?new N(o):new N();
+if(!gestured){try{c.suspend()}catch(e){}}return c};
+W.prototype=N.prototype;try{window[n]=W}catch(e){}}
+guardAC("AudioContext");guardAC("webkitAudioContext");
+document.addEventListener("play",function(e){
+var el=e.target;if(el instanceof HTMLMediaElement&&!gestured){try{el.pause()}catch(err){}}},true);
+document.addEventListener("pause",function(e){
+if(e.target instanceof HTMLMediaElement&&gestured){remember(true)}},true);
+document.addEventListener("volumechange",function(e){
+var el=e.target;if(el instanceof HTMLMediaElement&&gestured){remember(el.muted||el.volume===0)}},true);
+function sweep(n){if(n&&n.querySelectorAll){var l=n.querySelectorAll("audio,video");
+for(var i=0;i<l.length;i++){harden(l[i])}}}
+new MutationObserver(function(rs){for(var i=0;i<rs.length;i++){var a=rs[i].addedNodes;
+for(var j=0;j<a.length;j++){var n=a[j];
+if(n instanceof HTMLMediaElement){harden(n)}else{sweep(n)}}}})
+.observe(document.documentElement,{childList:true,subtree:true});
+document.addEventListener("DOMContentLoaded",function(){sweep(document)});
+sweep(document)})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Data Privacy | BYD USA</title>
+<link rel="icon" href="img/byd-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="byd-page">
+<div id="site-header"></div>
+
+<section class="page-hero" style="height:340px">
+  <img src="img/about_byd_pc.webp" alt="">
+  <div class="inner">
+    <h1>Privacy and Data Protection</h1>
+    <p>Traversing vast landscapes, safeguarding every mile</p>
+  </div>
+</section>
+
+<div class="page-body">
+  <div class="wrap">
+    <div class="legal-body">
+      <p style="font-size:18px;color:#252728">We not only protect your vehicle safety, but also your data privacy</p>
+
+      <h2>Process your data in accordance with the law and regulations</h2>
+      <p>"Privacy First": we prioritize your privacy and strictly comply with the law when handling your data. For example, we have equipped our DMS camera with a physical cover switch that can be manually operated by vehicle occupants to prevent any potential information leakage. (Due to different regulations and policies in different countries/regions, please refer to the manual of the specific vehicle for details of the function)</p>
+
+      <h2>All-round Data Protection</h2>
+      <p>We take various measures to protect your privacy in different areas, including product design and development, cloud services, and data compliance programs. We provide comprehensive privacy notices for both the mobile app and the vehicle systems, and you have control over sensitive permissions. Additionally, we use industry-leading encryption technology to ensure the safety of your data. If there is a risk of data leakage, we will detect it immediately and take necessary actions to prevent any potential information leaks.</p>
+
+      <h2>Privacy Compliance is Monitored</h2>
+      <p>BYD is willing to accept the supervision of the public and regulatory organizations on our privacy protection compliance work. Currently, BYD has obtained data security and privacy compliance certificates issued by third parties, such as R155 (CSMS) and R156 (SUMS) system certifications, and in the future, we hope to seek to build a higher level of privacy protection with our ecological partners in the industry.</p>
+
+      <h2>Privacy Protection Experience for Intelligent Connected Vehicles</h2>
+
+      <h3>Start-up</h3>
+      <p>We will provide you with clear information about the types of data we collect and how we use it. When you purchase a BYD New Energy Vehicle and start it, a reminder of our Privacy Policy will appear on the welcome page of the screen. This reminder will give you detailed information about our data collection and how we use it.</p>
+
+      <h3>Management of the Software</h3>
+      <p>BYD manages all third-party software that processes your data. For example, when you are navigating with maps or using other third-party software, we will request the software provide you with a Privacy Policy and allow you to choose how the software processes your data.</p>
+
+      <h3>Data Minimization</h3>
+      <p>When using a voice-activated smart service while driving, the vehicle systems prioritize collecting only the necessary data to perform specific functions. For instance, the voice assistant remains inactive until activated either by pressing a physical button or speaking a specific keyword. This approach ensures minimal data collection and enhances user control.</p>
+
+      <h3>Safe Driving</h3>
+      <p>Our panoramic camera offers precise information on the road conditions surrounding your vehicle, such as turning, merging, and coming to a stop while driving. This improves driving safety by providing you with a better understanding of your surroundings. Cameras inside and outside your vehicle process data locally at the vehicle end. In addition, the vehicle's panoramic camera does not involve storing the captured data and only collects real-time information on road conditions when you use it.</p>
+
+      <h3>Parking Security</h3>
+      <p>When you park your car, use the mobile app to check if your windows are closed. If they're not, click "close windows" and enter your password in the app. This will command the vehicle to close the windows and keep it secure.</p>
+
+      <p>Please refer to the specific vehicle model version and instruction manual for corresponding functions and details.</p>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/site.js" defer></script>
+</body>
+</html>
